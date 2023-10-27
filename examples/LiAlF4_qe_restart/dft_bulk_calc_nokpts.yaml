@@ -1,0 +1,23 @@
+input_data:  
+  control:
+    calculation: "scf"
+    pseudo_dir: "/home/jiankunp/projects/AFx/phase_diagram/GASP_LiF_AlF3/SSSP_1.3.0_PBE_precision"
+    outdir: './out/'
+    verbosity: 'high'
+    disk_io: 'none'
+    forc_conv_thr: 0.03
+    nstep: 1
+  system:
+    ecutwfc: 80
+    occupations: 'smearing'
+    smearing: 'gauss'
+    degauss: 0.01
+  electrons: 
+    electron_maxstep: 200
+    conv_thr: 1.0e-6
+    mixing_beta: 0.1
+pseudopotentials:
+  Li: "li_pbe_v1.4.uspp.F.UPF"
+  Al: "Al.pbe-n-kjpaw_psl.1.0.0.UPF"
+  F: "F.oncvpsp.upf"
+kpts:

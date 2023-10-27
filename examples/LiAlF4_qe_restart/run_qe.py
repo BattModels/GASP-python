@@ -141,9 +141,10 @@ def main():
                                     new_organism,
                                     relaxed_organisms,
                                     index,
-                                    creator,
+                                    # creator,
                                 ],
-                                name=str(index)
+                                kwargs={"creator":creator},
+                                name = str(index),
                             )
                             thread.start()
                             threads.append(thread)
@@ -255,8 +256,10 @@ def main():
                                                 new_organism,
                                                 relaxed_organisms,
                                                 index,
-                                                creator,
+                                                # creator,
                                             ],
+                                            kwargs={"creator":creator},
+                                            name = str(index),
                                         )
                                         new_thread.start()
                                         threads[index] = new_thread
@@ -371,7 +374,9 @@ def main():
         index = len(threads)
         new_thread = threading.Thread(
             target=energy_calculator.do_energy_calculation,
-            args=[unrelaxed_offspring, relaxed_organisms, index, composition_space],
+            args=[unrelaxed_offspring, relaxed_organisms, index],
+            kwargs={"composition":composition_space},
+            name = str(index),
         )
         new_thread.start()
         threads.append(new_thread)
@@ -497,8 +502,9 @@ def main():
                             unrelaxed_offspring,
                             relaxed_organisms,
                             index,
-                            composition_space,
                         ],
+                        kwargs={"composition":composition_space},
+                        name = str(index),
                     )
                     new_thread.start()
                     threads[index] = new_thread

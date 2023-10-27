@@ -1,0 +1,38 @@
+CompositionSpace: 
+    - LiAlF4
+
+EnergyCode: 
+    quantum_espresso:
+        qe_calc_settings: /home/jiankunp/projects/GASP-python/examples/LiAlF4_qe_restart/dft_bulk_calc_nokpts.yaml
+        slurm_template_path: /home/jiankunp/projects/GASP-python/examples/LiAlF4_qe_restart/run_relax.sh
+        # restart: False
+        ncore: 4
+
+Constraints: 
+    min_num_atoms: 20
+    max_num_atoms: 80
+    min_lattice_length: 3
+    max_lattice_length: 20
+    # min_lattice_angle: 30
+    # max_lattice_angle: 160
+    allow_endpoints: False
+
+Pool: 
+    size: 20
+    num_promoted: 5
+
+InitialPopulation:
+    from_files:
+    restart_from_database:
+        path_to_db: /home/jiankunp/projects/GASP-python/examples/LiAlF4_qe_restart/LiAlF4_restart.db
+    # random: 
+    #     number: 0
+    #     max_num_atoms: 60
+    #     allow_endpoints: False
+
+StoppingCriteria: 
+    num_energy_calcs: 48
+
+NumCalcsAtOnce: 3
+
+

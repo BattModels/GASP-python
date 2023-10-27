@@ -114,7 +114,6 @@ def make_objects(parameters):
     # ones are at the front and the successes-based ones are at the back
     if len(initial_organism_creators) > 1:
         initial_organism_creators.sort(key=lambda x: x.is_successes_based)
-
     objects_dict['organism_creators'] = initial_organism_creators
 
     # the number of energy calculations to run at a time
@@ -296,6 +295,12 @@ def make_organism_creators(parameters, composition_space, constraints):
 
         initial_organism_creators = []
 
+        # the restart from database
+        if 'restart_from_database' in parameters['InitialPopulation']:
+            given_path = parameters['InitialPopulation']['restart_from_database']['path_to_db']
+            restart_organism_creator = organism_creators.DatabaseOrganismCreator(given_path)
+            initial_organism_creators.append(restart_organism_creator)
+
         # the random organism creator
         if 'random' in parameters['InitialPopulation']:
             random_organism_creator = organism_creators.RandomOrganismCreator(
@@ -314,6 +319,8 @@ def make_organism_creators(parameters, composition_space, constraints):
                       'structures.')
                 print('Quitting...')
                 quit()
+        elif parameters['InitialPopulation']['restart_from_database'] is not None:
+            print("Restarting from the given database. Only proceed if this is intended.")
         # if nothing is given after the from_files keyword
         elif parameters['InitialPopulation']['from_files'] is None:
             print('The path to the folder containing the files must be '
@@ -687,11 +694,11 @@ def make_quantum_espresso_energy_calculator(parameters, geometry):
             # get the path to the INCAR file
             qe_calc_setting_path = parameters['EnergyCode']['quantum_espresso']['qe_calc_settings']
             slurm_template_path = parameters['EnergyCode']['quantum_espresso']['slurm_template_path']
-            eos_fit_path = parameters['EnergyCode']['quantum_espresso']['eos_fit_template']
-            eos_fit_sbatch_path = parameters['EnergyCode']['quantum_espresso']['eos_fit_sbatch_template']
-            slurm_array_template_path = parameters['EnergyCode']['quantum_espresso']['slurm_array_template_path']
+            # eos_fit_path = parameters['EnergyCode']['quantum_espresso']['eos_fit_template']
+            # eos_fit_sbatch_path = parameters['EnergyCode']['quantum_espresso']['eos_fit_sbatch_template']
+            # slurm_array_template_path = parameters['EnergyCode']['quantum_espresso']['slurm_array_template_path']
             ncore = parameters['EnergyCode']['quantum_espresso']['ncore']
-            restart = bool(parameters['EnergyCode']['quantum_espresso']['restart'])
+            # restart = bool(parameters['EnergyCode']['quantum_espresso']['restart'])
             
             # check that the INCAR file exists
             if not os.path.exists(qe_calc_setting_path):
@@ -702,31 +709,31 @@ def make_quantum_espresso_energy_calculator(parameters, geometry):
                 print('The given slurm_template file does not exist.')
                 print('Quitting...')
                 quit()
-            if not os.path.exists(slurm_array_template_path):
-                print('The given slurm_array_template file does not exist.')
-                print('Quitting...')
-                quit()
-            if not os.path.exists(eos_fit_path):
-                print('The given eos_fit_template file does not exist.')
-                print('Quitting...')
-                quit()
-            if not os.path.exists(eos_fit_sbatch_path):
-                print('The given eos_fit_sbatch_template file does not exist.')
-                print('Quitting...')
-                quit()
-            if restart:
-                restart_db_path =  parameters['EnergyCode']['quantum_espresso']['restart_db']
-                if not os.path.exists(restart_db_path):
-                    print('The given restart_db file does not exist.')
-                    print('Quitting...')
-                    quit()  
-            else:
-                restart_db_path = None
+            # if not os.path.exists(slurm_array_template_path):
+            #     print('The given slurm_array_template file does not exist.')
+            #     print('Quitting...')
+            #     quit()
+            # if not os.path.exists(eos_fit_path):
+            #     print('The given eos_fit_template file does not exist.')
+            #     print('Quitting...')
+            #     quit()
+            # if not os.path.exists(eos_fit_sbatch_path):
+            #     print('The given eos_fit_sbatch_template file does not exist.')
+            #     print('Quitting...')
+            #     quit()
+            # if restart:
+            #     restart_db_path =  parameters['EnergyCode']['quantum_espresso']['restart_db']
+            #     if not os.path.exists(restart_db_path):
+            #         print('The given restart_db file does not exist.')
+            #         print('Quitting...')
+            #         quit()  
+            # else:
+            #     restart_db_path = None
 
             
 
         return energy_calculators.QEEnergyCalculator(
-                qe_calc_setting_path, slurm_template_path, slurm_array_template_path, ncore,eos_fit_path,eos_fit_sbatch_path,restart,restart_db_path)
+                qe_calc_setting_path, slurm_template_path, ncore)
 
 def make_stopping_criteria(parameters, composition_space):
     """

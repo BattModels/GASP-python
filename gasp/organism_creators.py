@@ -21,6 +21,7 @@ from gasp.general import Organism, Cell
 
 from pymatgen.core.lattice import Lattice
 from pymatgen.core.composition import Composition
+from pymatgen.io.ase import AseAtomsAdaptor
 
 from fractions import Fraction
 import warnings
@@ -569,6 +570,54 @@ class RandomOrganismCreator(object):
         '''
         Increments num_made, and if necessary, updates is_finished.
         '''
+        self.num_made = self.num_made + 1
+        print('Organisms left for {}: {} '.format(
+            self.name, self.number - self.num_made))
+        if self.num_made == self.number:
+            self.is_finished = True
+
+class DatabaseOrganismCreator(object):
+    """
+    Creates organism from ase database for the initial population (restart)
+    """
+    def __init__(self, path_to_ase_db):
+        """
+        Makes a DatabaseOrganismCreator
+
+        Args:
+            path_to_ase_db: the path to the database containing the atoms from previous run
+        
+        Precondition: the database exists and contains files
+        """
+        from ase.db import connect 
+        self.name = "database organism creator"
+        self.path_to_ase_db = path_to_ase_db
+        self.ase_db = connect(self.path_to_ase_db)
+        #self.atoms = [atoms_row.toatoms() for atoms_row in connect(self.path_to_ase_db).select()]
+        self.number = len(self.ase_db)
+        self.num_made = 0
+        self.is_successes_based = False
+        self.is_finished = False
+        self.AAA = AseAtomsAdaptor()
+    
+    def create_organism(self,id_generator,composition_space,constratins,random):
+
+        #atoms = self.ase_db.get_atoms(id=id_geneator)
+        orig_garun_index = self.ase_db.get(id = id_generator.id+1).garun_index
+        atoms = self.ase_db.get_atoms(id = id_generator.id+1)
+        new_cell = self.AAA.get_structure(atoms)
+        new_org = Organism(new_cell, id_generator, self.name,
+                                        composition_space)
+        print('Making organism {} from database: garun_index = {}'.format(
+            new_org.id, orig_garun_index))
+        self.update_status()
+        return new_org
+
+    def update_status(self):
+        """
+        Increments num_made, and if necessary, updates is_finished.
+        """
+
         self.num_made = self.num_made + 1
         print('Organisms left for {}: {} '.format(
             self.name, self.number - self.num_made))
