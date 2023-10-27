@@ -1,1 +1,363 @@
 Job started on e001 at Fri Oct 27 14:20:06 EDT 2023
+Restarting from the given database. Only proceed if this is intended.
+Making 58 organisms with database organism creator
+Making organism 1 from database: garun_index = 10
+Organisms left for database organism creator: 57 
+Making organism 2 from database: garun_index = 17
+Organisms left for database organism creator: 56 
+Making organism 3 from database: garun_index = 20
+Organisms left for database organism creator: 55 
+Restarting organism 2 from database (garun_index = 17)
+Restarting organism 1 from database (garun_index = 10)
+Restarting organism 3 from database (garun_index = 20)
+Adding organism 1 to the initial population
+Number of energy calculations so far: 1 
+Making organism 4 from database: garun_index = 22
+Organisms left for database organism creator: 54 
+Restarting organism 4 from database (garun_index = 22)
+Adding organism 2 to the initial population
+Number of energy calculations so far: 2 
+Making organism 5 from database: garun_index = 24
+Organisms left for database organism creator: 53 
+Restarting organism 5 from database (garun_index = 24)
+Adding organism 3 to the initial population
+Number of energy calculations so far: 3 
+Making organism 6 from database: garun_index = 30
+Organisms left for database organism creator: 52 
+Restarting organism 6 from database (garun_index = 30)
+Adding organism 4 to the initial population
+Number of energy calculations so far: 4 
+Making organism 7 from database: garun_index = 31
+Organisms left for database organism creator: 51 
+Restarting organism 7 from database (garun_index = 31)
+Adding organism 5 to the initial population
+Number of energy calculations so far: 5 
+Making organism 8 from database: garun_index = 36
+Organisms left for database organism creator: 50 
+Organism 8 failed structural redundancy - looks like organism 3 
+Making organism 9 from database: garun_index = 40
+Organisms left for database organism creator: 49 
+Restarting organism 9 from database (garun_index = 40)
+Adding organism 6 to the initial population
+Number of energy calculations so far: 6 
+Making organism 10 from database: garun_index = 47
+Organisms left for database organism creator: 48 
+Restarting organism 10 from database (garun_index = 47)
+Adding organism 7 to the initial population
+Number of energy calculations so far: 7 
+Making organism 11 from database: garun_index = 48
+Organisms left for database organism creator: 47 
+Restarting organism 11 from database (garun_index = 48)
+Adding organism 9 to the initial population
+Number of energy calculations so far: 8 
+Making organism 12 from database: garun_index = 53
+Organisms left for database organism creator: 46 
+Restarting organism 12 from database (garun_index = 53)
+Adding organism 10 to the initial population
+Number of energy calculations so far: 9 
+Making organism 13 from database: garun_index = 56
+Organisms left for database organism creator: 45 
+Restarting organism 13 from database (garun_index = 56)
+Adding organism 11 to the initial population
+Number of energy calculations so far: 10 
+Making organism 14 from database: garun_index = 57
+Organisms left for database organism creator: 44 
+Restarting organism 14 from database (garun_index = 57)
+Adding organism 12 to the initial population
+Number of energy calculations so far: 11 
+Making organism 15 from database: garun_index = 60
+Organisms left for database organism creator: 43 
+Restarting organism 15 from database (garun_index = 60)
+Adding organism 13 to the initial population
+Number of energy calculations so far: 12 
+Making organism 16 from database: garun_index = 62
+Organisms left for database organism creator: 42 
+Restarting organism 16 from database (garun_index = 62)
+Adding organism 14 to the initial population
+Number of energy calculations so far: 13 
+Making organism 17 from database: garun_index = 64
+Organisms left for database organism creator: 41 
+Restarting organism 17 from database (garun_index = 64)
+Adding organism 15 to the initial population
+Number of energy calculations so far: 14 
+Making organism 18 from database: garun_index = 66
+Organisms left for database organism creator: 40 
+Restarting organism 18 from database (garun_index = 66)
+Adding organism 16 to the initial population
+Number of energy calculations so far: 15 
+Making organism 19 from database: garun_index = 69
+Organisms left for database organism creator: 39 
+Restarting organism 19 from database (garun_index = 69)
+Adding organism 17 to the initial population
+Number of energy calculations so far: 16 
+Making organism 20 from database: garun_index = 73
+Organisms left for database organism creator: 38 
+Restarting organism 20 from database (garun_index = 73)
+Adding organism 18 to the initial population
+Number of energy calculations so far: 17 
+Making organism 21 from database: garun_index = 79
+Organisms left for database organism creator: 37 
+Restarting organism 21 from database (garun_index = 79)
+Adding organism 19 to the initial population
+Number of energy calculations so far: 18 
+Making organism 22 from database: garun_index = 82
+Organisms left for database organism creator: 36 
+Restarting organism 22 from database (garun_index = 82)
+Adding organism 20 to the initial population
+Number of energy calculations so far: 19 
+Making organism 23 from database: garun_index = 84
+Organisms left for database organism creator: 35 
+Restarting organism 23 from database (garun_index = 84)
+Adding organism 21 to the initial population
+Number of energy calculations so far: 20 
+Making organism 24 from database: garun_index = 85
+Organisms left for database organism creator: 34 
+Restarting organism 24 from database (garun_index = 85)
+Adding organism 22 to the initial population
+Number of energy calculations so far: 21 
+Making organism 25 from database: garun_index = 93
+Organisms left for database organism creator: 33 
+Restarting organism 25 from database (garun_index = 93)
+Adding organism 23 to the initial population
+Number of energy calculations so far: 22 
+Making organism 26 from database: garun_index = 94
+Organisms left for database organism creator: 32 
+Restarting organism 26 from database (garun_index = 94)
+Adding organism 24 to the initial population
+Number of energy calculations so far: 23 
+Making organism 27 from database: garun_index = 96
+Organisms left for database organism creator: 31 
+Restarting organism 27 from database (garun_index = 96)
+Adding organism 25 to the initial population
+Number of energy calculations so far: 24 
+Making organism 28 from database: garun_index = 97
+Organisms left for database organism creator: 30 
+Organism 28 failed structural redundancy - looks like organism 20 
+Making organism 29 from database: garun_index = 101
+Organisms left for database organism creator: 29 
+Restarting organism 29 from database (garun_index = 101)
+Adding organism 26 to the initial population
+Number of energy calculations so far: 25 
+Making organism 30 from database: garun_index = 102
+Organisms left for database organism creator: 28 
+Restarting organism 30 from database (garun_index = 102)
+Adding organism 27 to the initial population
+Number of energy calculations so far: 26 
+Making organism 31 from database: garun_index = 103
+Organisms left for database organism creator: 27 
+Organism 31 failed structural redundancy - looks like organism 3 
+Making organism 32 from database: garun_index = 106
+Organisms left for database organism creator: 26 
+Restarting organism 32 from database (garun_index = 106)
+Adding organism 29 to the initial population
+Number of energy calculations so far: 27 
+Making organism 33 from database: garun_index = 107
+Organisms left for database organism creator: 25 
+Organism 33 failed min lattice length constraint 
+Making organism 34 from database: garun_index = 110
+Organisms left for database organism creator: 24 
+Restarting organism 34 from database (garun_index = 110)
+Adding organism 30 to the initial population
+Number of energy calculations so far: 28 
+Making organism 35 from database: garun_index = 111
+Organisms left for database organism creator: 23 
+Restarting organism 35 from database (garun_index = 111)
+Adding organism 32 to the initial population
+Number of energy calculations so far: 29 
+Making organism 36 from database: garun_index = 115
+Organisms left for database organism creator: 22 
+Restarting organism 36 from database (garun_index = 115)
+Adding organism 34 to the initial population
+Number of energy calculations so far: 30 
+Making organism 37 from database: garun_index = 116
+Organisms left for database organism creator: 21 
+Restarting organism 37 from database (garun_index = 116)
+Adding organism 35 to the initial population
+Number of energy calculations so far: 31 
+Making organism 38 from database: garun_index = 121
+Organisms left for database organism creator: 20 
+Organism 38 failed structural redundancy - looks like organism 16 
+Making organism 39 from database: garun_index = 124
+Organisms left for database organism creator: 19 
+Restarting organism 39 from database (garun_index = 124)
+Adding organism 36 to the initial population
+Number of energy calculations so far: 32 
+Making organism 40 from database: garun_index = 125
+Organisms left for database organism creator: 18 
+Restarting organism 40 from database (garun_index = 125)
+Adding organism 37 to the initial population
+Number of energy calculations so far: 33 
+Making organism 41 from database: garun_index = 127
+Organisms left for database organism creator: 17 
+Restarting organism 41 from database (garun_index = 127)
+Adding organism 39 to the initial population
+Number of energy calculations so far: 34 
+Making organism 42 from database: garun_index = 128
+Organisms left for database organism creator: 16 
+Organism 42 failed structural redundancy - looks like organism 16 
+Making organism 43 from database: garun_index = 132
+Organisms left for database organism creator: 15 
+Organism 43 failed structural redundancy - looks like organism 10 
+Making organism 44 from database: garun_index = 133
+Organisms left for database organism creator: 14 
+Restarting organism 44 from database (garun_index = 133)
+Adding organism 40 to the initial population
+Number of energy calculations so far: 35 
+Making organism 45 from database: garun_index = 134
+Organisms left for database organism creator: 13 
+Restarting organism 45 from database (garun_index = 134)
+Adding organism 41 to the initial population
+Number of energy calculations so far: 36 
+Making organism 46 from database: garun_index = 136
+Organisms left for database organism creator: 12 
+Restarting organism 46 from database (garun_index = 136)
+Adding organism 44 to the initial population
+Number of energy calculations so far: 37 
+Making organism 47 from database: garun_index = 143
+Organisms left for database organism creator: 11 
+Restarting organism 47 from database (garun_index = 143)
+Adding organism 45 to the initial population
+Number of energy calculations so far: 38 
+Making organism 48 from database: garun_index = 144
+Organisms left for database organism creator: 10 
+Organism 48 failed structural redundancy - looks like organism 16 
+Making organism 49 from database: garun_index = 151
+Organisms left for database organism creator: 9 
+Restarting organism 49 from database (garun_index = 151)
+Adding organism 46 to the initial population
+Number of energy calculations so far: 39 
+Making organism 50 from database: garun_index = 154
+Organisms left for database organism creator: 8 
+Organism 50 failed structural redundancy - looks like organism 20 
+Making organism 51 from database: garun_index = 155
+Organisms left for database organism creator: 7 
+Restarting organism 51 from database (garun_index = 155)
+Adding organism 47 to the initial population
+Number of energy calculations so far: 40 
+Making organism 52 from database: garun_index = 157
+Organisms left for database organism creator: 6 
+Restarting organism 52 from database (garun_index = 157)
+Adding organism 49 to the initial population
+Number of energy calculations so far: 41 
+Making organism 53 from database: garun_index = 163
+Organisms left for database organism creator: 5 
+Organism 53 failed structural redundancy - looks like organism 14 
+Making organism 54 from database: garun_index = 174
+Organisms left for database organism creator: 4 
+Organism 54 failed structural redundancy - looks like organism 16 
+Making organism 55 from database: garun_index = 175
+Organisms left for database organism creator: 3 
+Restarting organism 55 from database (garun_index = 175)
+Adding organism 51 to the initial population
+Number of energy calculations so far: 42 
+Making organism 56 from database: garun_index = 178
+Organisms left for database organism creator: 2 
+Restarting organism 56 from database (garun_index = 178)
+Adding organism 52 to the initial population
+Number of energy calculations so far: 43 
+Making organism 57 from database: garun_index = 182
+Organisms left for database organism creator: 1 
+Restarting organism 57 from database (garun_index = 182)
+Adding organism 55 to the initial population
+Number of energy calculations so far: 44 
+Making organism 58 from database: garun_index = 24865
+Organisms left for database organism creator: 0 
+Organism 58 failed max lattice angle constraint 
+Adding organism 56 to the initial population
+Number of energy calculations so far: 45 
+Adding organism 57 to the initial population
+Number of energy calculations so far: 46 
+Populating the pool with the initial population...
+Summary of the initial population: 
+Organism 5 has value -571.5106573607443 and fitness 1.0 and selection probability 0.0912692927269074 
+Organism 40 has value -571.5096705795917 and fitness 0.9761469544388742 and selection probability 0.08909224212916075 
+Organism 52 has value -571.5090894748203 and fitness 0.9621001533305261 and selection probability 0.08781020052692629 
+Organism 4 has value -571.5082177751452 and fitness 0.9410289239004338 and selection probability 0.08588704431995536 
+Organism 12 has value -571.5030802885475 and fitness 0.8168426222467046 and selection probability 0.07455264840164912 
+Organism 45 has value -571.502039056282 and fitness 0.7916733528473109 and selection probability 0.07225546698511347 
+Organism 22 has value -571.5003956342018 and fitness 0.7519476024612127 and selection probability 0.06862972584432862 
+Organism 19 has value -571.4967475759278 and fitness 0.6637646249188826 and selection probability 0.06058132785348738 
+Organism 15 has value -571.4965413816666 and fitness 0.6587803778106399 and selection probability 0.06012641914514195 
+Organism 55 has value -571.4959347152013 and fitness 0.6441156846330627 and selection probability 0.058787982970767365 
+Organism 9 has value -571.4957636463015 and fitness 0.6399805081042005 and selection probability 0.05841056833367721 
+Organism 11 has value -571.4934756734627 and fitness 0.5846743034602896 and selection probability 0.05336281015241786 
+Organism 56 has value -571.4894615578266 and fitness 0.4876427753435625 and selection probability 0.04450681120899315 
+Organism 10 has value -571.4858834706027 and fitness 0.40115117855248533 and selection probability 0.03661278434305068 
+Organism 13 has value -571.4777702547773 and fitness 0.20503382647468552 and selection probability 0.01871329232743601 
+Organism 14 has value -571.4762648529934 and fitness 0.16864438263102877 and selection probability 0.015392053525099942 
+Organism 49 has value -571.4739750774005 and fitness 0.11329460077020397 and selection probability 0.010340318082073854 
+Organism 30 has value -571.4736287218362 and fitness 0.10492229346301547 and selection probability 0.009576183515654441 
+Organism 36 has value -571.4711433077314 and fitness 0.044843424177784925 and selection probability 0.004092827608159129 
+Organism 51 has value -571.4692881716363 and fitness -0.0 and selection probability -0.0 
+Organism 57 has value -571.466520532963 and fitness 0.0 and selection probability 0.0 
+Organism 24 has value -571.466336626526 and fitness 0.0 and selection probability 0.0 
+Organism 2 has value -571.4652471507444 and fitness 0.0 and selection probability 0.0 
+Organism 16 has value -571.4650990017664 and fitness 0.0 and selection probability 0.0 
+Organism 7 has value -571.4649667601099 and fitness 0.0 and selection probability 0.0 
+Organism 35 has value -571.4610819703549 and fitness 0.0 and selection probability 0.0 
+Organism 21 has value -571.4592510599502 and fitness 0.0 and selection probability 0.0 
+Organism 34 has value -571.4581148448376 and fitness 0.0 and selection probability 0.0 
+Organism 29 has value -571.4580953584633 and fitness 0.0 and selection probability 0.0 
+Organism 17 has value -571.4571433795368 and fitness 0.0 and selection probability 0.0 
+Organism 27 has value -571.453473479403 and fitness 0.0 and selection probability 0.0 
+Organism 25 has value -571.4511396355409 and fitness 0.0 and selection probability 0.0 
+Organism 20 has value -571.4504948816418 and fitness 0.0 and selection probability 0.0 
+Organism 26 has value -571.4504143954705 and fitness 0.0 and selection probability 0.0 
+Organism 3 has value -571.4499378504415 and fitness 0.0 and selection probability 0.0 
+Organism 32 has value -571.4461095035216 and fitness 0.0 and selection probability 0.0 
+Organism 46 has value -571.4455430758903 and fitness 0.0 and selection probability 0.0 
+Organism 41 has value -571.4416739005566 and fitness 0.0 and selection probability 0.0 
+Organism 6 has value -571.441224958075 and fitness 0.0 and selection probability 0.0 
+Organism 23 has value -571.4377520768641 and fitness 0.0 and selection probability 0.0 
+Organism 37 has value -571.4316391812046 and fitness 0.0 and selection probability 0.0 
+Organism 44 has value -571.4316276021938 and fitness 0.0 and selection probability 0.0 
+Organism 47 has value -571.430090402774 and fitness 0.0 and selection probability 0.0 
+Organism 39 has value -571.4299250681064 and fitness 0.0 and selection probability 0.0 
+Organism 1 has value -571.4124372905501 and fitness 0.0 and selection probability 0.0 
+Organism 18 has value -571.379324452926 and fitness 0.0 and selection probability 0.0 
+Creating offspring organism 59 from parent organisms 45 and 55 with the mating variation 
+Organism 59 has incorrect composition 
+Creating offspring organism 60 from parent organisms 15 and 40 with the mating variation 
+Organism 60 has incorrect composition 
+Creating offspring organism 61 from parent organisms 4 and 22 with the mating variation 
+Organism 61 has incorrect composition 
+Creating offspring organism 62 from parent organisms 40 and 5 with the mating variation 
+Organism 62 has incorrect composition 
+Creating offspring organism 63 from parent organisms 56 and 15 with the mating variation 
+Organism 63 failed per-species minimum interatomic distance constraint 
+Creating offspring organism 64 from parent organisms 52 and 40 with the mating variation 
+Creating offspring organism 65 from parent organisms 40 and 5 with the mating variation 
+Organism 65 has incorrect composition 
+Starting quantum espresso calculation on organism 64 
+Creating offspring organism 66 from parent organisms 5 and 40 with the mating variation 
+Organism 66 has incorrect composition 
+Creating offspring organism 67 from parent organisms 22 and 45 with the mating variation 
+Organism 67 has incorrect composition 
+Creating offspring organism 68 from parent organisms 12 and 10 with the mating variation 
+Organism 68 has incorrect composition 
+Creating offspring organism 69 from parent organisms 11 and 55 with the mating variation 
+Organism 69 has incorrect composition 
+Creating offspring organism 70 from parent organisms 5 and 4 with the mating variation 
+Organism 70 has incorrect composition 
+Creating offspring organism 71 from parent organisms 52 and 12 with the mating variation 
+Organism 71 has incorrect composition 
+Creating offspring organism 72 from parent organisms 14 and 15 with the mating variation 
+Organism 72 has incorrect composition 
+Creating offspring organism 73 from parent organisms 56 and 55 with the mating variation 
+Organism 73 has incorrect composition 
+Creating offspring organism 74 from parent organisms 49 and 56 with the mating variation 
+Organism 74 has incorrect composition 
+Creating offspring organism 75 from parent organisms 22 and 19 with the mating variation 
+Organism 75 has incorrect composition 
+Creating offspring organism 76 from parent organisms 19 and 4 with the mating variation 
+Organism 76 has incorrect composition 
+Creating offspring organism 77 from parent organisms 9 and 12 with the mating variation 
+Starting quantum espresso calculation on organism 77 
+Creating offspring organism 78 from parent organisms 22 and 56 with the mating variation 
+Organism 78 has incorrect composition 
+Creating offspring organism 79 from parent organisms 4 and 55 with the mating variation 
+Organism 79 has incorrect composition 
+Creating offspring organism 80 from parent organisms 52 and 12 with the mating variation 
+Organism 80 has incorrect composition 
+Creating offspring organism 81 from parent organisms 55 and 19 with the mating variation 
+Starting quantum espresso calculation on organism 81 
