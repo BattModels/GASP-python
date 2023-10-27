@@ -104,8 +104,11 @@ def main():
     relaxed_organisms = {}
 
     # populate the initial population
-    for creator in organism_creators: #[from_files_organism, random_organism] #[restart_organism/from_files_organism, random_organism]
-
+    for (
+        creator
+    ) in (
+        organism_creators
+    ):  # [from_files_organism, random_organism] #[restart_organism/from_files_organism, random_organism]
         print("Making {} organisms with {}".format(creator.number, creator.name))
         while not creator.is_finished and not stopping_criteria.are_satisfied:
             stopping_criteria.update_calc_counter(num_finished_calcs)
@@ -131,8 +134,10 @@ def main():
                         if redundant_organism is None:  # no redundancy
                             # add a copy to whole_pop (population) so the organisms in
                             # whole_pop don't change upon relaxation
-                            whole_pop.append(copy.deepcopy(new_organism)) #RAM bottleneck 
-                            geometry.pad(new_organism.cell) #Does nothing to bulk 
+                            whole_pop.append(
+                                copy.deepcopy(new_organism)
+                            )  # RAM bottleneck
+                            geometry.pad(new_organism.cell)  # Does nothing to bulk
 
                             index = len(threads)
                             thread = threading.Thread(
@@ -143,8 +148,8 @@ def main():
                                     index,
                                     # creator,
                                 ],
-                                kwargs={"creator":creator},
-                                name = str(index),
+                                kwargs={"creator": creator},
+                                name=str(index),
                             )
                             thread.start()
                             threads.append(thread)
@@ -155,16 +160,17 @@ def main():
                     # if not thread.is_alive():
                     #     print(index,thread.is_alive())
                     if not thread.is_alive():
-                        
                         relaxed_organism = relaxed_organisms[index]
                         relaxed_organisms[index] = None
-
 
                         # take care of relaxed organism
                         if relaxed_organism is not None:
                             ase_atom_path = relaxed_organism[1]
                             relaxed_organism = relaxed_organism[0]
-                            num_finished_calcs = run_db.write(read(ase_atom_path),garun_index=int(relaxed_organism.id))
+                            num_finished_calcs = run_db.write(
+                                read(ase_atom_path),
+                                garun_index=int(relaxed_organism.id),
+                            )
                             geometry.unpad(relaxed_organism.cell, constraints)
                             if developer.develop(
                                 relaxed_organism,
@@ -258,8 +264,8 @@ def main():
                                                 index,
                                                 # creator,
                                             ],
-                                            kwargs={"creator":creator},
-                                            name = str(index),
+                                            kwargs={"creator": creator},
+                                            name=str(index),
                                         )
                                         new_thread.start()
                                         threads[index] = new_thread
@@ -288,7 +294,9 @@ def main():
                 if relaxed_organism is not None:
                     ase_atom_path = relaxed_organism[1]
                     relaxed_organism = relaxed_organism[0]
-                    num_finished_calcs = run_db.write(read(ase_atom_path),garun_index=int(relaxed_organism.id))
+                    num_finished_calcs = run_db.write(
+                        read(ase_atom_path), garun_index=int(relaxed_organism.id)
+                    )
                     geometry.unpad(relaxed_organism.cell, constraints)
                     if developer.develop(
                         relaxed_organism, composition_space, constraints, geometry, pool
@@ -375,8 +383,8 @@ def main():
         new_thread = threading.Thread(
             target=energy_calculator.do_energy_calculation,
             args=[unrelaxed_offspring, relaxed_organisms, index],
-            kwargs={"composition":composition_space},
-            name = str(index),
+            kwargs={"composition": composition_space},
+            name=str(index),
         )
         new_thread.start()
         threads.append(new_thread)
@@ -394,7 +402,9 @@ def main():
                 if relaxed_offspring is not None:
                     ase_atom_path = relaxed_offspring[1]
                     relaxed_offspring = relaxed_offspring[0]
-                    num_finished_calcs = run_db.write(read(ase_atom_path),garun_index=int(relaxed_offspring.id))
+                    num_finished_calcs = run_db.write(
+                        read(ase_atom_path), garun_index=int(relaxed_offspring.id)
+                    )
                     geometry.unpad(relaxed_offspring.cell, constraints)
                     if developer.develop(
                         relaxed_offspring,
@@ -503,8 +513,8 @@ def main():
                             relaxed_organisms,
                             index,
                         ],
-                        kwargs={"composition":composition_space},
-                        name = str(index),
+                        kwargs={"composition": composition_space},
+                        name=str(index),
                     )
                     new_thread.start()
                     threads[index] = new_thread
@@ -526,7 +536,9 @@ def main():
                 if relaxed_offspring is not None:
                     ase_atom_path = relaxed_offspring[1]
                     relaxed_offspring = relaxed_offspring[0]
-                    num_finished_calcs = run_db.write(read(ase_atom_path),garun_index=int(relaxed_offspring.id))
+                    num_finished_calcs = run_db.write(
+                        read(ase_atom_path), garun_index=int(relaxed_offspring.id)
+                    )
                     geometry.unpad(relaxed_offspring.cell, constraints)
                     if developer.develop(
                         relaxed_offspring,

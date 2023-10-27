@@ -98,7 +98,7 @@ def main():
     relaxed_organisms = {}
 
     # populate the initial population
-    for creator in organism_creators: #[from_files_organism, random_organism]
+    for creator in organism_creators:  # [from_files_organism, random_organism]
         print("Making {} organisms with {}".format(creator.number, creator.name))
         while not creator.is_finished and not stopping_criteria.are_satisfied:
             # start initial batch of energy calculations
@@ -123,9 +123,11 @@ def main():
                         if redundant_organism is None:  # no redundancy
                             # add a copy to whole_pop (population) so the organisms in
                             # whole_pop don't change upon relaxation
-                            whole_pop.append(copy.deepcopy(new_organism)) #RAM bottleneck (TODO: make a database, instead of appending the list)
-                            geometry.pad(new_organism.cell) #Does nothing to bulk 
-                            stopping_criteria.update_calc_counter() #TODO: update calc count based on success run
+                            whole_pop.append(
+                                copy.deepcopy(new_organism)
+                            )  # RAM bottleneck (TODO: make a database, instead of appending the list)
+                            geometry.pad(new_organism.cell)  # Does nothing to bulk
+                            stopping_criteria.update_calc_counter()  # TODO: update calc count based on success run
                             index = len(threads)
                             thread = threading.Thread(
                                 target=energy_calculator.do_energy_calculation,
@@ -135,7 +137,7 @@ def main():
                                     index,
                                     composition_space,
                                 ],
-                                name=str(index)
+                                name=str(index),
                             )
                             thread.start()
                             threads.append(thread)

@@ -28,8 +28,7 @@ from gasp.general import Organism, Cell
 
 from pymatgen.core.lattice import Lattice
 from pymatgen.core.periodic_table import Element, Specie
-from pymatgen.transformations.standard_transformations import \
-    RotationTransformation
+from pymatgen.transformations.standard_transformations import RotationTransformation
 
 import copy
 import numpy as np
@@ -56,8 +55,8 @@ class Mating(object):
             parameter.
         """
 
-        self.name = 'mating'
-        self.fraction = mating_params['fraction']  # not optional
+        self.name = "mating"
+        self.fraction = mating_params["fraction"]  # not optional
 
         # default values
         #
@@ -84,64 +83,65 @@ class Mating(object):
         self.default_merge_cutoff = 1.0
 
         # the mean of the cut location
-        if 'mu_cut_loc' not in mating_params:
+        if "mu_cut_loc" not in mating_params:
             self.mu_cut_loc = self.default_mu_cut_loc
-        elif mating_params['mu_cut_loc'] in (None, 'default'):
+        elif mating_params["mu_cut_loc"] in (None, "default"):
             self.mu_cut_loc = self.default_mu_cut_loc
         else:
-            self.mu_cut_loc = mating_params['mu_cut_loc']
+            self.mu_cut_loc = mating_params["mu_cut_loc"]
 
         # the standard deviation of the cut location
-        if 'sigma_cut_loc' not in mating_params:
+        if "sigma_cut_loc" not in mating_params:
             self.sigma_cut_loc = self.default_sigma_cut_loc
-        elif mating_params['sigma_cut_loc'] in (None, 'default'):
+        elif mating_params["sigma_cut_loc"] in (None, "default"):
             self.sigma_cut_loc = self.default_sigma_cut_loc
         else:
-            self.sigma_cut_loc = mating_params['sigma_cut_loc']
+            self.sigma_cut_loc = mating_params["sigma_cut_loc"]
 
         # the probability of shifting the atoms in the parents
-        if 'shift_prob' not in mating_params:
+        if "shift_prob" not in mating_params:
             self.shift_prob = self.default_shift_prob
-        elif mating_params['shift_prob'] in (None, 'default'):
+        elif mating_params["shift_prob"] in (None, "default"):
             self.shift_prob = self.default_shift_prob
         else:
-            self.shift_prob = mating_params['shift_prob']
+            self.shift_prob = mating_params["shift_prob"]
 
         # the probability of rotating the parents
-        if 'rotate_prob' not in mating_params:
+        if "rotate_prob" not in mating_params:
             self.rotate_prob = self.default_rotate_prob
-        elif mating_params['rotate_prob'] in (None, 'default'):
+        elif mating_params["rotate_prob"] in (None, "default"):
             self.rotate_prob = self.default_rotate_prob
         else:
-            self.rotate_prob = mating_params['rotate_prob']
+            self.rotate_prob = mating_params["rotate_prob"]
 
         # the probability of doubling one of the parents
-        if 'doubling_prob' not in mating_params:
+        if "doubling_prob" not in mating_params:
             self.doubling_prob = self.default_doubling_prob
-        elif mating_params['doubling_prob'] in (None, 'default'):
+        elif mating_params["doubling_prob"] in (None, "default"):
             self.doubling_prob = self.default_doubling_prob
         else:
-            self.doubling_prob = mating_params['doubling_prob']
+            self.doubling_prob = mating_params["doubling_prob"]
 
         # whether to grow the smaller of the parents before doing the variation
-        if 'grow_parents' not in mating_params:
+        if "grow_parents" not in mating_params:
             self.grow_parents = self.default_grow_parents
-        elif mating_params['grow_parents'] in (None, 'default'):
+        elif mating_params["grow_parents"] in (None, "default"):
             self.grow_parents = self.default_grow_parents
         else:
-            self.grow_parents = mating_params['grow_parents']
+            self.grow_parents = mating_params["grow_parents"]
 
         # the cutoff distance (as fraction of atomic radius) below which to
         # merge sites in the offspring structure
-        if 'merge_cutoff' not in mating_params:
+        if "merge_cutoff" not in mating_params:
             self.merge_cutoff = self.default_merge_cutoff
-        elif mating_params['merge_cutoff'] in (None, 'default'):
+        elif mating_params["merge_cutoff"] in (None, "default"):
             self.merge_cutoff = self.default_merge_cutoff
         else:
-            self.merge_cutoff = mating_params['merge_cutoff']
+            self.merge_cutoff = mating_params["merge_cutoff"]
 
-    def do_variation(self, pool, random, geometry, constraints, id_generator,
-                     composition_space):
+    def do_variation(
+        self, pool, random, geometry, constraints, id_generator, composition_space
+    ):
         """
         Performs the mating operation.
 
@@ -213,8 +213,7 @@ class Mating(object):
 
         # select two parent organisms from the pool and get their cells
         parent1 = pool.select_organism(random, composition_space)
-        parent2 = pool.select_organism(random, composition_space,
-                                       excluded_org=parent1)
+        parent2 = pool.select_organism(random, composition_space, excluded_org=parent1)
         cell_1 = copy.deepcopy(parent1.cell)
         cell_2 = copy.deepcopy(parent2.cell)
 
@@ -226,23 +225,23 @@ class Mating(object):
                 self.double_parent(cell_2, geometry)
 
         # grow the smaller parent if specified
-        if self.grow_parents and geometry.shape != 'cluster':
+        if self.grow_parents and geometry.shape != "cluster":
             self.grow_parent_cell(cell_1, cell_2, geometry, random)
 
         # get the offspring cell
-        offspring_cell = self.make_offspring_cell(cell_1, cell_2, geometry,
-                                                  constraints, random)
+        offspring_cell = self.make_offspring_cell(
+            cell_1, cell_2, geometry, constraints, random
+        )
 
         # merge close sites in the offspring cell
-        offspring_cell = self.merge_sites(offspring_cell, geometry,
-                                          constraints)
+        offspring_cell = self.merge_sites(offspring_cell, geometry, constraints)
 
         # make the offspring organism from the offspring cell
-        offspring = Organism(offspring_cell, id_generator, self.name,
-                             composition_space)
-        print('Creating offspring organism {} from parent organisms {} and {} '
-              'with the mating variation '.format(offspring.id, parent1.id,
-                                                  parent2.id))
+        offspring = Organism(offspring_cell, id_generator, self.name, composition_space)
+        print(
+            "Creating offspring organism {} from parent organisms {} and {} "
+            "with the mating variation ".format(offspring.id, parent1.id, parent2.id)
+        )
         return offspring
 
     def double_parent(self, cell, geometry):
@@ -262,17 +261,17 @@ class Mating(object):
 
         # get the lattice vector to double
         doubling_index = 0
-        if geometry.shape == 'bulk':
+        if geometry.shape == "bulk":
             abc_lengths = cell.lattice.abc
             smallest_vector = min(abc_lengths)
             doubling_index = abc_lengths.index(smallest_vector)
-        elif geometry.shape == 'sheet':
+        elif geometry.shape == "sheet":
             ab_lengths = [cell.lattice.a, cell.lattice.b]
             smallest_vector = min(ab_lengths)
             doubling_index = ab_lengths.index(smallest_vector)
-        elif geometry.shape == 'wire':
+        elif geometry.shape == "wire":
             doubling_index = 2
-        elif geometry.shape == 'cluster':
+        elif geometry.shape == "cluster":
             doubling_index = None
 
         # take the supercell
@@ -299,10 +298,10 @@ class Mating(object):
         vol_1 = parent_cell_1.lattice.volume
         vol_2 = parent_cell_2.lattice.volume
         if vol_1 < vol_2:
-            volume_ratio = vol_2/vol_1
+            volume_ratio = vol_2 / vol_1
             parent_to_grow = parent_cell_1
         else:
-            volume_ratio = vol_1/vol_2
+            volume_ratio = vol_1 / vol_2
             parent_to_grow = parent_cell_2
         num_doubles = self.get_num_doubles(volume_ratio)
         for _ in range(num_doubles):
@@ -335,8 +334,9 @@ class Mating(object):
         else:
             return 7
 
-    def make_offspring_cell(self, parent_cell_1, parent_cell_2, geometry,
-                            constraints, random):
+    def make_offspring_cell(
+        self, parent_cell_1, parent_cell_2, geometry, constraints, random
+    ):
         """
         Combines two parent structures to produce and offspring structure.
         Returns the offspring structure, as a Cell.
@@ -358,8 +358,7 @@ class Mating(object):
 
         # loop needed here because sometimes no atoms get contributed from one
         # of the parents, so have to try again
-        while len(species_from_parent_1) == 0 or len(
-                species_from_parent_2) == 0:
+        while len(species_from_parent_1) == 0 or len(species_from_parent_2) == 0:
             species_from_parent_1 = []
             frac_coords_from_parent_1 = []
             species_from_parent_2 = []
@@ -369,24 +368,19 @@ class Mating(object):
             cut_vector_index = random.randint(0, 2)
             cut_location = random.gauss(self.mu_cut_loc, self.sigma_cut_loc)
             while cut_location > 1 or cut_location < 0:
-                cut_location = random.gauss(self.mu_cut_loc,
-                                            self.sigma_cut_loc)
+                cut_location = random.gauss(self.mu_cut_loc, self.sigma_cut_loc)
 
             # possibly shift the atoms in each parent along the cut vector
             if random.random() < self.shift_prob:
-                self.do_random_shift(parent_cell_1, cut_vector_index, geometry,
-                                     random)
+                self.do_random_shift(parent_cell_1, cut_vector_index, geometry, random)
             if random.random() < self.shift_prob:
-                self.do_random_shift(parent_cell_2, cut_vector_index, geometry,
-                                     random)
+                self.do_random_shift(parent_cell_2, cut_vector_index, geometry, random)
 
             # possibly rotate the atoms in each parent (for wires and clusters)
             if random.random() < self.rotate_prob:
-                self.do_random_rotation(parent_cell_1, geometry, constraints,
-                                        random)
+                self.do_random_rotation(parent_cell_1, geometry, constraints, random)
             if random.random() < self.rotate_prob:
-                self.do_random_rotation(parent_cell_2, geometry, constraints,
-                                        random)
+                self.do_random_rotation(parent_cell_2, geometry, constraints, random)
 
             # get the site contributions of each parent
             for site in parent_cell_1.sites:
@@ -400,23 +394,29 @@ class Mating(object):
 
         # combine the information for the sites contributed by each parent
         offspring_species = species_from_parent_1 + species_from_parent_2
-        offspring_frac_coords = frac_coords_from_parent_1 + \
-            frac_coords_from_parent_2
+        offspring_frac_coords = frac_coords_from_parent_1 + frac_coords_from_parent_2
 
         # compute the lattice vectors of the offspring
-        offspring_lengths = 0.5*(np.array(parent_cell_1.lattice.abc) +
-                                 np.array(parent_cell_2.lattice.abc))
-        offspring_angles = 0.5*(np.array(parent_cell_1.lattice.angles) +
-                                np.array(parent_cell_2.lattice.angles))
-        offspring_lattice = Lattice.from_parameters(a=offspring_lengths[0],b=offspring_lengths[1],c=offspring_lengths[2],
-                                                    alpha=offspring_angles[0],beta=offspring_angles[1],gamma=offspring_angles[2])
+        offspring_lengths = 0.5 * (
+            np.array(parent_cell_1.lattice.abc) + np.array(parent_cell_2.lattice.abc)
+        )
+        offspring_angles = 0.5 * (
+            np.array(parent_cell_1.lattice.angles)
+            + np.array(parent_cell_2.lattice.angles)
+        )
+        offspring_lattice = Lattice.from_parameters(
+            a=offspring_lengths[0],
+            b=offspring_lengths[1],
+            c=offspring_lengths[2],
+            alpha=offspring_angles[0],
+            beta=offspring_angles[1],
+            gamma=offspring_angles[2],
+        )
 
         # make the offspring cell
-        return Cell(offspring_lattice, offspring_species,
-                    offspring_frac_coords)
+        return Cell(offspring_lattice, offspring_species, offspring_frac_coords)
 
-    def do_random_shift(self, cell, lattice_vector_index, geometry,
-                        random):
+    def do_random_shift(self, cell, lattice_vector_index, geometry, random):
         """
         Modifies a cell by shifting the atoms along one of the lattice
         vectors. Makes sure all the atoms lie inside the cell after the shift
@@ -437,19 +437,19 @@ class Mating(object):
             random: copy of Python's built in PRNG
         """
 
-        if geometry.shape == 'cluster':
+        if geometry.shape == "cluster":
             pass
-        elif geometry.shape == 'wire' and lattice_vector_index != 2:
+        elif geometry.shape == "wire" and lattice_vector_index != 2:
             pass
-        elif geometry.shape == 'sheet' and lattice_vector_index == 2:
+        elif geometry.shape == "sheet" and lattice_vector_index == 2:
             pass
         else:
             # do the shift
-            shift_vector = random.random()*cell.lattice.matrix[
-                lattice_vector_index]
+            shift_vector = random.random() * cell.lattice.matrix[lattice_vector_index]
             site_indices = [i for i in range(len(cell.sites))]
-            cell.translate_sites(site_indices, shift_vector, frac_coords=False,
-                                 to_unit_cell=False)
+            cell.translate_sites(
+                site_indices, shift_vector, frac_coords=False, to_unit_cell=False
+            )
 
             # translate the sites back into the cell if needed
             translation_vectors = {}
@@ -462,11 +462,11 @@ class Mating(object):
                         translation_vector.append(-1.0)
                     else:
                         translation_vector.append(0.0)
-                translation_vectors[
-                    cell.sites.index(site)] = translation_vector
+                translation_vectors[cell.sites.index(site)] = translation_vector
             for key in translation_vectors:
-                cell.translate_sites(key, translation_vectors[key],
-                                     frac_coords=True, to_unit_cell=False)
+                cell.translate_sites(
+                    key, translation_vectors[key], frac_coords=True, to_unit_cell=False
+                )
 
     def do_random_rotation(self, cell, geometry, constraints, random):
         """
@@ -488,16 +488,16 @@ class Mating(object):
             random: copy of Python's built in PRNG
         """
 
-        if geometry.shape == 'bulk' or geometry.shape == 'sheet':
+        if geometry.shape == "bulk" or geometry.shape == "sheet":
             pass
         else:
             geometry.pad(cell, padding=100)
-            if geometry.shape == 'wire':
-                self.rotate_about_axis(cell, [0, 0, 1], random.random()*360)
-            elif geometry.shape == 'cluster':
-                self.rotate_about_axis(cell, [1, 0, 0], random.random()*360)
-                self.rotate_about_axis(cell, [0, 1, 0], random.random()*360)
-                self.rotate_about_axis(cell, [0, 0, 1], random.random()*360)
+            if geometry.shape == "wire":
+                self.rotate_about_axis(cell, [0, 0, 1], random.random() * 360)
+            elif geometry.shape == "cluster":
+                self.rotate_about_axis(cell, [1, 0, 0], random.random() * 360)
+                self.rotate_about_axis(cell, [0, 1, 0], random.random() * 360)
+                self.rotate_about_axis(cell, [0, 0, 1], random.random() * 360)
             cell.translate_atoms_into_cell()
             cell.rotate_to_principal_directions()
             geometry.unpad(cell, constraints)
@@ -527,14 +527,13 @@ class Mating(object):
         # Cartesian atomic site coordinates
         species = cell.species
         cartesian_coords = cell.cart_coords
-        cell.lattice=rotated_cell.lattice
+        cell.lattice = rotated_cell.lattice
         site_indices = []
         for i in range(len(cell.sites)):
             site_indices.append(i)
         cell.remove_sites(site_indices)
         for i in range(len(cartesian_coords)):
-            cell.append(species[i], cartesian_coords[i],
-                        coords_are_cartesian=True)
+            cell.append(species[i], cartesian_coords[i], coords_are_cartesian=True)
 
     def merge_sites(self, cell, geometry, constraints):
         """
@@ -562,7 +561,7 @@ class Mating(object):
 
         # remove duplicate sites if needed
         if cell.num_sites > 1:
-            cell.merge_sites(mode='delete')
+            cell.merge_sites(mode="delete")
 
         # go through the cell site by site and merge pairs of sites if
         # needed
@@ -578,15 +577,18 @@ class Mating(object):
                     other_index = cell.sites.index(other_site)
                     # check that the other site hasn't already been merged, is
                     # distinct from and has the same symbol as the site
-                    if other_index not in merged_indices and other_index != \
-                            site_index and other_symbol == symbol:
+                    if (
+                        other_index not in merged_indices
+                        and other_index != site_index
+                        and other_symbol == symbol
+                    ):
                         # make a new site if the two are close enough
-                        if site.distance(other_site) < \
-                                a_radius*self.merge_cutoff:
+                        if site.distance(other_site) < a_radius * self.merge_cutoff:
                             merged_indices.append(other_index)
                             merged_indices.append(site_index)
-                            new_frac_coords = np.add(
-                                site.frac_coords, other_site.frac_coords)/2
+                            new_frac_coords = (
+                                np.add(site.frac_coords, other_site.frac_coords) / 2
+                            )
                             species.append(site.specie)
                             frac_coords.append(new_frac_coords)
 
@@ -628,8 +630,8 @@ class StructureMut(object):
             parameter
         """
 
-        self.name = 'structure mutation'
-        self.fraction = structure_mut_params['fraction']  # not optional
+        self.name = "structure mutation"
+        self.fraction = structure_mut_params["fraction"]  # not optional
 
         # the default values
         #
@@ -648,53 +650,58 @@ class StructureMut(object):
         self.default_sigma_strain_matrix_element = 0.2
 
         # the fraction of atoms to perturb, on average
-        if 'frac_atoms_perturbed' not in structure_mut_params:
+        if "frac_atoms_perturbed" not in structure_mut_params:
             self.frac_atoms_perturbed = self.default_frac_atoms_perturbed
-        elif structure_mut_params['frac_atoms_perturbed'] in (None, 'default'):
+        elif structure_mut_params["frac_atoms_perturbed"] in (None, "default"):
             self.frac_atoms_perturbed = self.default_frac_atoms_perturbed
         else:
-            self.frac_atoms_perturbed = structure_mut_params[
-                'frac_atoms_perturbed']
+            self.frac_atoms_perturbed = structure_mut_params["frac_atoms_perturbed"]
 
         # the standard deviation of the perturbation of each atomic coordinate
-        if 'sigma_atomic_coord_perturbation' not in structure_mut_params:
-            self.sigma_atomic_coord_perturbation = \
+        if "sigma_atomic_coord_perturbation" not in structure_mut_params:
+            self.sigma_atomic_coord_perturbation = (
                 self.default_sigma_atomic_coord_perturbation
-        elif structure_mut_params['sigma_atomic_coord_perturbation'] in (
-                None, 'default'):
-            self.sigma_atomic_coord_perturbation = \
+            )
+        elif structure_mut_params["sigma_atomic_coord_perturbation"] in (
+            None,
+            "default",
+        ):
+            self.sigma_atomic_coord_perturbation = (
                 self.default_sigma_atomic_coord_perturbation
+            )
         else:
             self.sigma_atomic_coord_perturbation = structure_mut_params[
-                'sigma_atomic_coord_perturbation']
+                "sigma_atomic_coord_perturbation"
+            ]
 
         # the maximum allowed magnitude of perturbation of each atomic coord
-        if 'max_atomic_coord_perturbation' not in structure_mut_params:
-            self.max_atomic_coord_perturbation = \
+        if "max_atomic_coord_perturbation" not in structure_mut_params:
+            self.max_atomic_coord_perturbation = (
                 self.default_max_atomic_coord_perturbation
-        elif structure_mut_params['max_atomic_coord_perturbation'] in (
-                None, 'default'):
-            self.max_atomic_coord_perturbation = \
+            )
+        elif structure_mut_params["max_atomic_coord_perturbation"] in (None, "default"):
+            self.max_atomic_coord_perturbation = (
                 self.default_max_atomic_coord_perturbation
+            )
         else:
             self.max_atomic_coord_perturbation = structure_mut_params[
-                'max_atomic_coord_perturbation']
+                "max_atomic_coord_perturbation"
+            ]
 
         # the standard deviation of the magnitude of the non-identity
         # components of the elements in the strain matrix
-        if 'sigma_strain_matrix_element' not in structure_mut_params:
-            self.sigma_strain_matrix_element = \
-                self.default_sigma_strain_matrix_element
-        elif structure_mut_params['sigma_strain_matrix_element'] in (
-                None, 'default'):
-            self.sigma_strain_matrix_element = \
-                self.default_sigma_strain_matrix_element
+        if "sigma_strain_matrix_element" not in structure_mut_params:
+            self.sigma_strain_matrix_element = self.default_sigma_strain_matrix_element
+        elif structure_mut_params["sigma_strain_matrix_element"] in (None, "default"):
+            self.sigma_strain_matrix_element = self.default_sigma_strain_matrix_element
         else:
             self.sigma_strain_matrix_element = structure_mut_params[
-                'sigma_strain_matrix_element']
+                "sigma_strain_matrix_element"
+            ]
 
-    def do_variation(self, pool, random, geometry, constraints, id_generator,
-                     composition_space):
+    def do_variation(
+        self, pool, random, geometry, constraints, id_generator, composition_space
+    ):
         """
         Performs the structure mutation operation.
 
@@ -752,9 +759,10 @@ class StructureMut(object):
 
         # create a new organism from the perturbed cell
         offspring = Organism(cell, id_generator, self.name, composition_space)
-        print('Creating offspring organism {} from parent organism {} with '
-              'the structure mutation variation '.format(offspring.id,
-                                                         parent_org.id))
+        print(
+            "Creating offspring organism {} from parent organism {} with "
+            "the structure mutation variation ".format(offspring.id, parent_org.id)
+        )
         return offspring
 
     def perturb_atomic_coords(self, cell, geometry, constraints, random):
@@ -787,23 +795,23 @@ class StructureMut(object):
                 # perturbation along x-coordinate
                 nudge_x = random.gauss(0, self.sigma_atomic_coord_perturbation)
                 while np.abs(nudge_x) > self.max_atomic_coord_perturbation:
-                    nudge_x = random.gauss(
-                        0, self.sigma_atomic_coord_perturbation)
+                    nudge_x = random.gauss(0, self.sigma_atomic_coord_perturbation)
                 # perturbation along y-coordinate
                 nudge_y = random.gauss(0, self.sigma_atomic_coord_perturbation)
                 while np.abs(nudge_y) > self.max_atomic_coord_perturbation:
-                    nudge_y = random.gauss(
-                        0, self.sigma_atomic_coord_perturbation)
+                    nudge_y = random.gauss(0, self.sigma_atomic_coord_perturbation)
                 # perturbation along z-coordinate
                 nudge_z = random.gauss(0, self.sigma_atomic_coord_perturbation)
                 while np.abs(nudge_z) > self.max_atomic_coord_perturbation:
-                    nudge_z = random.gauss(
-                        0, self.sigma_atomic_coord_perturbation)
+                    nudge_z = random.gauss(0, self.sigma_atomic_coord_perturbation)
                 # translate the site by the random coordinate perturbations
                 perturbation_vector = [nudge_x, nudge_y, nudge_z]
                 cell.translate_sites(
-                    cell.sites.index(site), perturbation_vector,
-                    frac_coords=False, to_unit_cell=True)
+                    cell.sites.index(site),
+                    perturbation_vector,
+                    frac_coords=False,
+                    to_unit_cell=True,
+                )
 
         # unpad the cell
         geometry.unpad(cell, constraints)
@@ -846,7 +854,7 @@ class StructureMut(object):
         new_b = strain_matrix.dot(cell.lattice.matrix[1])
         new_c = strain_matrix.dot(cell.lattice.matrix[2])
         new_lattice = Lattice([new_a, new_b, new_c])
-        cell.lattice=new_lattice
+        cell.lattice = new_lattice
 
 
 class NumAtomsMut(object):
@@ -869,8 +877,8 @@ class NumAtomsMut(object):
             this parameter
         """
 
-        self.name = 'number of atoms mutation'
-        self.fraction = num_atoms_mut_params['fraction']  # not optional
+        self.name = "number of atoms mutation"
+        self.fraction = num_atoms_mut_params["fraction"]  # not optional
 
         # the default values
         #
@@ -883,31 +891,32 @@ class NumAtomsMut(object):
         self.default_scale_volume = True
 
         # the average number of stoichiometries to add
-        if 'mu_num_adds' not in num_atoms_mut_params:
+        if "mu_num_adds" not in num_atoms_mut_params:
             self.mu_num_adds = self.default_mu_num_adds
-        elif num_atoms_mut_params['mu_num_adds'] in (None, 'default'):
+        elif num_atoms_mut_params["mu_num_adds"] in (None, "default"):
             self.mu_num_adds = self.default_mu_num_adds
         else:
-            self.mu_num_adds = num_atoms_mut_params['mu_num_adds']
+            self.mu_num_adds = num_atoms_mut_params["mu_num_adds"]
 
         # the standard deviation of the number of stoichiometries
-        if 'sigma_num_adds' not in num_atoms_mut_params:
+        if "sigma_num_adds" not in num_atoms_mut_params:
             self.sigma_num_adds = self.default_sigma_num_adds
-        elif num_atoms_mut_params['sigma_num_adds'] in (None, 'default'):
+        elif num_atoms_mut_params["sigma_num_adds"] in (None, "default"):
             self.sigma_num_adds = self.default_sigma_num_adds
         else:
-            self.sigma_num_adds = num_atoms_mut_params['sigma_num_adds']
+            self.sigma_num_adds = num_atoms_mut_params["sigma_num_adds"]
 
         # whether to scale the volume of the offspring after adding atoms
-        if 'scale_volume' not in num_atoms_mut_params:
+        if "scale_volume" not in num_atoms_mut_params:
             self.scale_volume = self.default_scale_volume
-        elif num_atoms_mut_params['scale_volume'] in (None, 'default'):
+        elif num_atoms_mut_params["scale_volume"] in (None, "default"):
             self.scale_volume = self.default_scale_volume
         else:
-            self.scale_volume = num_atoms_mut_params['scale_volume']
+            self.scale_volume = num_atoms_mut_params["scale_volume"]
 
-    def do_variation(self, pool, random, geometry, constraints, id_generator,
-                     composition_space):
+    def do_variation(
+        self, pool, random, geometry, constraints, id_generator, composition_space
+    ):
         """
         Performs the number of atoms mutation operation.
 
@@ -953,7 +962,7 @@ class NumAtomsMut(object):
         # select a parent organism from the pool and get its cell
         parent_org = pool.select_organism(random, composition_space)
         cell = copy.deepcopy(parent_org.cell)
-        parent_vol_per_atom = copy.deepcopy(cell.lattice.volume/cell.num_sites)
+        parent_vol_per_atom = copy.deepcopy(cell.lattice.volume / cell.num_sites)
 
         # compute a valid, non-zero number of atoms (or stoichiometries) to add
         # or remove
@@ -961,35 +970,39 @@ class NumAtomsMut(object):
 
         # add or remove atoms
         # if fixed composition search
-        if composition_space.objective_function == 'epa':
+        if composition_space.objective_function == "epa":
             if num_adds > 0:
                 self.add_atoms_epa(cell, num_adds, random)
             elif num_adds < 0:
-                self.remove_atoms_epa(cell, -1*num_adds, random)
+                self.remove_atoms_epa(cell, -1 * num_adds, random)
 
         # if phase diagram search
-        elif composition_space.objective_function == 'pd':
+        elif composition_space.objective_function == "pd":
             if num_adds > 0:
                 self.add_atoms_pd(cell, num_adds, composition_space, random)
             elif num_adds < 0:
-                self.remove_atoms_pd(cell, -1*num_adds, random)
+                self.remove_atoms_pd(cell, -1 * num_adds, random)
 
         # optionally scale the volume after atoms have been added
         if self.scale_volume and num_adds > 0:
             # this is to suppress the warnings produced if the scale_lattice
             # method fails
             with warnings.catch_warnings():
-                warnings.simplefilter('ignore')
-                cell.scale_lattice(parent_vol_per_atom*len(cell.sites))
-                if str(cell.lattice.a) == 'nan' or cell.lattice.a > 100:
-                    return self.do_variation(pool, random, geometry,
-                                             constraints, id_generator)
+                warnings.simplefilter("ignore")
+                cell.scale_lattice(parent_vol_per_atom * len(cell.sites))
+                if str(cell.lattice.a) == "nan" or cell.lattice.a > 100:
+                    return self.do_variation(
+                        pool, random, geometry, constraints, id_generator
+                    )
 
         # create a new organism from the cell
         offspring = Organism(cell, id_generator, self.name, composition_space)
-        print('Creating offspring organism {} from parent organism {} with '
-              'the number of atoms mutation variation '.format(
-                  offspring.id, parent_org.id))
+        print(
+            "Creating offspring organism {} from parent organism {} with "
+            "the number of atoms mutation variation ".format(
+                offspring.id, parent_org.id
+            )
+        )
         return offspring
 
     def compute_num_adds(self, cell, composition_space, random):
@@ -1005,16 +1018,21 @@ class NumAtomsMut(object):
             random: a copy of Python's built in PRNG
         """
 
-        num_adds = int(round(random.gauss(self.mu_num_adds,
-                                          self.sigma_num_adds)))
+        num_adds = int(round(random.gauss(self.mu_num_adds, self.sigma_num_adds)))
         # keep trying until we get a valid number
-        while num_adds == 0 or \
-            (composition_space.objective_function == 'epa' and num_adds*-1 >=
-             cell.num_sites/composition_space.endpoints[0].num_atoms) or \
-            (composition_space.objective_function == 'pd' and
-                num_adds*-1 >= cell.num_sites):
-            num_adds = int(round(random.gauss(self.mu_num_adds,
-                                              self.sigma_num_adds)))
+        while (
+            num_adds == 0
+            or (
+                composition_space.objective_function == "epa"
+                and num_adds * -1
+                >= cell.num_sites / composition_space.endpoints[0].num_atoms
+            )
+            or (
+                composition_space.objective_function == "pd"
+                and num_adds * -1 >= cell.num_sites
+            )
+        ):
+            num_adds = int(round(random.gauss(self.mu_num_adds, self.sigma_num_adds)))
         return num_adds
 
     def add_atoms_epa(self, cell, num_adds, random):
@@ -1036,14 +1054,14 @@ class NumAtomsMut(object):
         total_add = 0
         for key in cell.composition.reduced_composition:
             amounts_to_add[key] = int(
-                num_adds*cell.composition.reduced_composition[key])
+                num_adds * cell.composition.reduced_composition[key]
+            )
             total_add += amounts_to_add[key]
 
         # put the new atoms in the cell at random locations
         for key in amounts_to_add:
             for _ in range(amounts_to_add[key]):
-                frac_coords = [random.random(), random.random(),
-                               random.random()]
+                frac_coords = [random.random(), random.random(), random.random()]
                 cell.append(Specie(key, 0), frac_coords)
         cell.remove_oxidation_states()
         cell.sort()
@@ -1069,16 +1087,18 @@ class NumAtomsMut(object):
         amounts_to_remove = {}
         for key in cell.composition.reduced_composition:
             amounts_to_remove[key] = int(
-                num_removes*cell.composition.reduced_composition[key])
+                num_removes * cell.composition.reduced_composition[key]
+            )
 
         # remove random atoms
         site_indices_to_remove = []
         for key in amounts_to_remove:
             for _ in range(0, amounts_to_remove[key]):
                 random_site = random.choice(cell.sites)
-                while str(random_site.specie.symbol) != str(key) or \
-                        cell.sites.index(random_site) in \
-                        site_indices_to_remove:
+                while (
+                    str(random_site.specie.symbol) != str(key)
+                    or cell.sites.index(random_site) in site_indices_to_remove
+                ):
                     random_site = random.choice(cell.sites)
                 site_indices_to_remove.append(cell.sites.index(random_site))
         cell.remove_sites(site_indices_to_remove)
@@ -1156,8 +1176,8 @@ class Permutation(object):
             parameter
         """
 
-        self.name = 'permutation'
-        self.fraction = permutation_params['fraction']  # not optional
+        self.name = "permutation"
+        self.fraction = permutation_params["fraction"]  # not optional
 
         # The max number of times to try getting a parent organism from the
         # pool that can undergo at least one swap. This is needed in case,
@@ -1172,35 +1192,35 @@ class Permutation(object):
         # the standard deviation of pairs to swap
         self.default_sigma_num_swaps = 1
         # which atomic pairs to swap
-        self.default_pairs_to_swap = composition_space.get_all_swappable_pairs(
-            )
+        self.default_pairs_to_swap = composition_space.get_all_swappable_pairs()
 
         # the average number of swaps
-        if 'mu_num_swaps' not in permutation_params:
+        if "mu_num_swaps" not in permutation_params:
             self.mu_num_swaps = self.default_mu_num_swaps
-        elif permutation_params['mu_num_swaps'] in (None, 'default'):
+        elif permutation_params["mu_num_swaps"] in (None, "default"):
             self.mu_num_swaps = self.default_mu_num_swaps
         else:
-            self.mu_num_swaps = permutation_params['mu_num_swaps']
+            self.mu_num_swaps = permutation_params["mu_num_swaps"]
 
         # the standard deviation of the number of swaps
-        if 'sigma_num_swaps' not in permutation_params:
+        if "sigma_num_swaps" not in permutation_params:
             self.sigma_num_swaps = self.default_sigma_num_swaps
-        elif permutation_params['sigma_num_swaps'] in (None, 'default'):
+        elif permutation_params["sigma_num_swaps"] in (None, "default"):
             self.sigma_num_swaps = self.default_sigma_num_swaps
         else:
-            self.sigma_num_swaps = permutation_params['sigma_num_swaps']
+            self.sigma_num_swaps = permutation_params["sigma_num_swaps"]
 
         # which pairs of atoms to swap
-        if 'pairs_to_swap' not in permutation_params:
+        if "pairs_to_swap" not in permutation_params:
             self.pairs_to_swap = self.default_pairs_to_swap
-        elif permutation_params['pairs_to_swap'] in (None, 'default'):
+        elif permutation_params["pairs_to_swap"] in (None, "default"):
             self.pairs_to_swap = self.default_pairs_to_swap
         else:
-            self.pairs_to_swap = permutation_params['pairs_to_swap']
+            self.pairs_to_swap = permutation_params["pairs_to_swap"]
 
-    def do_variation(self, pool, random, geometry, constraints, id_generator,
-                     composition_space):
+    def do_variation(
+        self, pool, random, geometry, constraints, id_generator, composition_space
+    ):
         """
         Performs the permutation operation.
 
@@ -1251,11 +1271,11 @@ class Permutation(object):
         cell = copy.deepcopy(parent_org.cell)
 
         # compute a positive random number of swaps to do
-        num_swaps = int(round(random.gauss(self.mu_num_swaps,
-                                           self.sigma_num_swaps)))
+        num_swaps = int(round(random.gauss(self.mu_num_swaps, self.sigma_num_swaps)))
         while num_swaps <= 0:
-            num_swaps = int(round(random.gauss(self.mu_num_swaps,
-                                               self.sigma_num_swaps)))
+            num_swaps = int(
+                round(random.gauss(self.mu_num_swaps, self.sigma_num_swaps))
+            )
 
         # get the indices of the sites to swap
         pair_indices = self.get_indices_to_swap(cell, num_swaps, random)
@@ -1265,8 +1285,10 @@ class Permutation(object):
 
         # make a new organism from the cell
         offspring = Organism(cell, id_generator, self.name, composition_space)
-        print('Creating offspring organism {} from parent organism {} with '
-              'the permutation variation '.format(offspring.id, parent_org.id))
+        print(
+            "Creating offspring organism {} from parent organism {} with "
+            "the permutation variation ".format(offspring.id, parent_org.id)
+        )
         return offspring
 
     def select_valid_parent(self, pool, composition_space, random):
@@ -1358,14 +1380,13 @@ class Permutation(object):
                 site_2 = random.choice(cell_to_check.sites)
             # record the indices (w.r.t. to the unchanged cell) for this
             # pair of sites
-            pair_index = [cell.sites.index(site_1),
-                          cell.sites.index(site_2)]
+            pair_index = [cell.sites.index(site_1), cell.sites.index(site_2)]
             pair_indices.append(pair_index)
             num_swaps_selected += 1
             # remove these two sites from the cell to check
             cell_to_check.remove_sites(
-                [cell_to_check.sites.index(site_1),
-                 cell_to_check.sites.index(site_2)])
+                [cell_to_check.sites.index(site_1), cell_to_check.sites.index(site_2)]
+            )
             possible_swaps = self.get_possible_swaps(cell_to_check)
         return pair_indices
 
