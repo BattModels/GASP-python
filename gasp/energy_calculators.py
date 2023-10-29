@@ -176,6 +176,7 @@ class QEEnergyCalculator(threading.Thread):
                     )
                 )
                 dictionary[key] = None
+                self.remove_out_dir(job_dir_path+"/"+"out")
                 _stop_event.set()
                 return
 
@@ -190,6 +191,7 @@ class QEEnergyCalculator(threading.Thread):
                     )
                 )
                 dictionary[key] = None
+                self.remove_out_dir(job_dir_path+"/"+"out")
                 _stop_event.set()
                 return
 
@@ -201,7 +203,12 @@ class QEEnergyCalculator(threading.Thread):
         #       'eV/atom '.format(organism.id, organism.epa))
         dictionary[key] = (organism, relax_output)
         # run_db.write(ase_relaxed_cell,garun_index = int(organism.id))
+        self.remove_out_dir(job_dir_path+"/"+"out")
         _stop_event.set()  # turn off the thread
+        
+    def remove_out_dir(self,directory_path):
+        if os.path.exists(directory_path):
+            shutil.rmtree(directory_path)
 
     def check_convergence(self, output_path, organism, dictionary, key, _stop_event):
         # check if the qe calculation converged
