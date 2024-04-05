@@ -315,13 +315,18 @@ def make_organism_creators(parameters, composition_space, constraints):
 
         # the restart from database
         if "restart_from_database" in parameters["InitialPopulation"]:
-            given_path = parameters["InitialPopulation"]["restart_from_database"][
-                "path_to_db"
-            ]
-            restart_organism_creator = organism_creators.DatabaseOrganismCreator(
-                given_path
-            )
-            initial_organism_creators.append(restart_organism_creator)
+            if parameters["InitialPopulation"]["restart_from_database"] is None:
+                print(
+                        "Skipping restart..."
+                    )
+            else:
+                given_path = parameters["InitialPopulation"]["restart_from_database"][
+                    "path_to_db"
+                ]
+                restart_organism_creator = organism_creators.DatabaseOrganismCreator(
+                    given_path
+                )
+                initial_organism_creators.append(restart_organism_creator)
 
         # the random organism creator
         if "random" in parameters["InitialPopulation"]:

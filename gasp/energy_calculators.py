@@ -271,8 +271,8 @@ class QEEnergyCalculator(threading.Thread):
         elif natoms > 48:
             ncore = self.ncore_base * 8
 
-        if ncore >= 28:  # for highmem only
-            ncore = 28
+        if ncore >= 64:  # for highmem only
+            ncore = 64
         # elif self.natoms > 64:
         #     self.ncore = self.ncore_base * 8
 
